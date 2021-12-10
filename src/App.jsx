@@ -1,15 +1,8 @@
 import "./App.scss"
-import BigWeatherView from "./components/big-weather-view/BigWeatherView"
+import HomeScreen from "./components/home/HomeScreen"
 
 function App() {
-
-    return (
-        <div
-            className="App"
-        >
-           <BigWeatherView />
-        </div>
-    )
+    return <HomeScreen />
 }
 
 export default App

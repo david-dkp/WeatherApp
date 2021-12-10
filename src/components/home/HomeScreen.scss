@@ -1,0 +1,51 @@
+@import "../../styles/themes";
+@import "../../styles/colors";
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.weather-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    flex-grow: 1;
+    background-color: $background;
+
+    .temp-unit-selector-container {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-self: flex-end;
+        margin-right: 125px;
+        margin-top: 42px;
+
+        .temp-unit-button {
+            box-shadow: none;
+            background-color: $comet;
+            color: $white;
+            font-weight: 700;
+        }
+
+        .temp-unit-button-selected {
+            background-color: $white;
+            color: $haiti;
+        }
+    }
+
+    .days-weather-container {
+        width: 100%;
+        padding: 10px 40px;
+        flex: 1 0 0px;
+        background-color: blue;
+    }
+
+    .today-hightlights-container {
+        flex: 2 0 0px;
+        width: 100%;
+        background-color: red;
+    }
+}
