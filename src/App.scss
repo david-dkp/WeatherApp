@@ -1,0 +1,33 @@
+@import "./styles/themes";
+@import "./styles/colors";
+
+button {
+    background-color: $button-background;
+    color: $white;
+    font-family: $main-font-family;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    padding: 11px 18px 10px 18px;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.round-icon {
+    @extend button;
+    padding: 9px;
+    border-radius: 999px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+* {
+    font-family: $main-font-family;
+}
