@@ -1,46 +1,48 @@
-import React from "react"
+import React, { useEffect } from "react"
 import BigWeatherView from "../big-weather-view/BigWeatherView"
 import "./HomeScreen.scss"
 import { selectTempUnit, setUnit } from "../../features/tempUnit/tempUnitSlice"
 import { useSelector, useDispatch } from "react-redux"
+import SmallWeatherView from "../small-weather-view/SmallWeatherView"
+import add from "date-fns/add"
 
 function HomeScreen() {
     const tempUnit = useSelector(selectTempUnit)
     const dispatch = useDispatch()
 
-    const onTempUnitChange = (tempUnit) => {
+    const setTempUnit = (tempUnit) => {
         dispatch(setUnit(tempUnit))
     }
 
     const nextDaysWeather = [
         {
-            date: new Date(Date.now() + 1),
-            degree: 10,
+            date: add(new Date(Date.now()), { days: 1 }),
+            minDegree: 11,
+            maxDegree: 16,
             weatherState: "Light Rain",
         },
         {
-            date: new Date(Date.now() + 2),
-            degree: 10,
+            date: add(new Date(Date.now()), { days: 2 }),
+            minDegree: 11,
+            maxDegree: 16,
             weatherState: "Light Rain",
         },
         {
-            date: new Date(Date.now() + 3),
-            degree: 10,
+            date: add(new Date(Date.now()), { days: 3 }),
+            minDegree: 11,
+            maxDegree: 16,
             weatherState: "Light Rain",
         },
         {
-            date: new Date(Date.now() + 4),
-            degree: 10,
+            date: add(new Date(Date.now()), { days: 4 }),
+            minDegree: 11,
+            maxDegree: 16,
             weatherState: "Light Rain",
         },
         {
-            date: new Date(Date.now() + 5),
-            degree: 10,
-            weatherState: "Light Rain",
-        },
-        {
-            date: new Date(Date.now() + 6),
-            degree: 10,
+            date: add(new Date(Date.now()), { days: 5 }),
+            minDegree: 11,
+            maxDegree: 16,
             weatherState: "Light Rain",
         },
     ]
@@ -48,28 +50,42 @@ function HomeScreen() {
     return (
         <main className="main-container">
             <BigWeatherView />
-            <div className="weather-details-container">
-                <div className="temp-unit-selector-container">
-                    <button
-                        className={`round-icon temp-unit-button ${
-                            tempUnit === "C" ? "temp-unit-button-selected" : ""
-                        }`}
-                        onClick={(e) => onTempUnitChange("C")}
-                    >
-                        °C
-                    </button>
-                    <button
-                        className={`round-icon temp-unit-button ${
-                            tempUnit === "F" ? "temp-unit-button-selected" : ""
-                        }`}
-                        onClick={(e) => onTempUnitChange("F")}
-                    >
-                        °F
-                    </button>
+            <section className="weather-details-section">
+                <div className="weather-details-container">
+                    <div className="temp-unit-selector-container">
+                        <button
+                            className={`round-icon temp-unit-button ${
+                                tempUnit === "C"
+                                    ? "temp-unit-button-selected"
+                                    : ""
+                            }`}
+                            onClick={(e) => setTempUnit("C")}
+                        >
+                            °C
+                        </button>
+                        <button
+                            className={`round-icon temp-unit-button ${
+                                tempUnit === "F"
+                                    ? "temp-unit-button-selected"
+                                    : ""
+                            }`}
+                            onClick={(e) => setTempUnit("F")}
+                        >
+                            °F
+                        </button>
+                    </div>
+                    <div className="days-weather-container">
+                        {nextDaysWeather.map((e, i) => (
+                            <SmallWeatherView key={i} weatherData={e} />
+                        ))}
+                    </div>
+                    <div className="today-hightlights-container">
+                        <h2 className="today-hightlights-title">
+                            Today's Hightlights
+                        </h2>
+                    </div>
                 </div>
-                <div className="days-weather-container"></div>
-                <div className="today-hightlights-container"></div>
-            </div>
+            </section>
         </main>
     )
 }
