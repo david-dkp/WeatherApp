@@ -9,6 +9,11 @@ export const fetchWeathersForLocation = createAsyncThunk(
     }
 )
 
+export const selectWeatherData = (state) => state.currentWeather
+export const selectDaysConsolidatedWeathers = (state) =>
+    selectWeatherData(state).weather["consolidated_weather"]
+export const selectWeatherStatus = (state) => selectWeatherData(state).status
+
 export const currentWeatherSlice = createSlice({
     name: "currentWeather",
     initialState: {
