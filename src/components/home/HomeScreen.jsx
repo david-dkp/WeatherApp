@@ -1,51 +1,32 @@
-import React, { useEffect } from "react"
+import React from "react"
 import BigWeatherView from "../big-weather-view/BigWeatherView"
 import "./HomeScreen.scss"
 import { selectTempUnit, setUnit } from "../../features/tempUnit/tempUnitSlice"
 import { useSelector, useDispatch } from "react-redux"
 import SmallWeatherView from "../small-weather-view/SmallWeatherView"
 import add from "date-fns/add"
+import WindStatus from "../hightlights/wind-status/WindStatus"
+import { selectDaysConsolidatedWeathers } from "../../features/currentWeather/currentWeatherSlice"
 
 function HomeScreen() {
     const tempUnit = useSelector(selectTempUnit)
+
     const dispatch = useDispatch()
 
     const setTempUnit = (tempUnit) => {
         dispatch(setUnit(tempUnit))
     }
 
-    const nextDaysWeather = [
-        {
-            date: add(new Date(Date.now()), { days: 1 }),
-            minDegree: 11,
-            maxDegree: 16,
-            weatherState: "Light Rain",
-        },
-        {
-            date: add(new Date(Date.now()), { days: 2 }),
-            minDegree: 11,
-            maxDegree: 16,
-            weatherState: "Light Rain",
-        },
-        {
-            date: add(new Date(Date.now()), { days: 3 }),
-            minDegree: 11,
-            maxDegree: 16,
-            weatherState: "Light Rain",
-        },
-        {
-            date: add(new Date(Date.now()), { days: 4 }),
-            minDegree: 11,
-            maxDegree: 16,
-            weatherState: "Light Rain",
-        },
-        {
-            date: add(new Date(Date.now()), { days: 5 }),
-            minDegree: 11,
-            maxDegree: 16,
-            weatherState: "Light Rain",
-        },
-    ]
+    const nextDaysWeather = useSelector(selectDaysConsolidatedWeathers)
+        ?.slice(1, 6)
+        ?.map((weather) => {
+            return {
+                date: Date.parse(weather["applicable_date"]),
+                minDegree: Math.round(weather["min_temp"]),
+                maxDegree: Math.round(weather["max_temp"]),
+                weatherState: weather["weather_state_name"],
+            }
+        })
 
     return (
         <main className="main-container">
@@ -75,14 +56,20 @@ function HomeScreen() {
                         </button>
                     </div>
                     <div className="days-weather-container">
-                        {nextDaysWeather.map((e, i) => (
-                            <SmallWeatherView key={i} weatherData={e} />
-                        ))}
+                        {nextDaysWeather &&
+                            nextDaysWeather.map((e, i) => (
+                                <SmallWeatherView key={i} weatherData={e} />
+                            ))}
                     </div>
                     <div className="today-hightlights-container">
                         <h2 className="today-hightlights-title">
                             Today's Hightlights
                         </h2>
+                        <WindStatus
+                            mphValue="7"
+                            directionDegree={200}
+                            directionCompass="WSW"
+                        />
                     </div>
                 </div>
             </section>

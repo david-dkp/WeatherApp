@@ -1,0 +1,22 @@
+@import "../../../styles/themes";
+@import "../../../styles/colors";
+
+.windstatus-container {
+    background-color: $surface;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .wind-direction-contaienr {
+        display: flex;
+        flex-direction: row;
+
+        .windstatus-direction-icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

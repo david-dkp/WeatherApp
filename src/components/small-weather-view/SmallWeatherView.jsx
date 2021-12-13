@@ -1,10 +1,10 @@
 import React from "react"
 import "./SmallWeatherView.scss"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { selectTempUnit } from "../../features/tempUnit/tempUnitSlice"
 import { isTomorrow } from "date-fns"
 import { toShortDateString } from "../../utilities/dateFormatter"
-import { celToFar, farToCel } from "../../utilities/tempConversion"
+import { celToFar } from "../../utilities/tempConversion"
 import getWeatherImageUrl from "../../utilities/weatherImage"
 
 function SmallWeatherView({

@@ -57,7 +57,17 @@
     }
 
     .today-hightlights-container {
+        flex: 1;
         width: 100%;
         background-color: red;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .today-hightlights-title {
+            color: $white;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
     }
 }
