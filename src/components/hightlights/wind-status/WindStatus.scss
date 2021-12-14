@@ -6,17 +6,26 @@
     color: $white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 0.6em;
+    padding-block: 1.7em;
 
-    .wind-direction-contaienr {
+    .wind-direction-container {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        gap: 0.7em;
+        margin-top: 1em;
 
         .windstatus-direction-icon {
-            width: 20px;
-            height: 20px;
+            width: 1.7em;
+            height: 1.7em;
+        }
+
+        .direction-compass {
+            font-size: 0.9em;
+            font-style: normal;
+            font-weight: 500;
         }
     }
 }

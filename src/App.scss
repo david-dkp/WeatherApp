@@ -30,4 +30,7 @@ button {
 
 * {
     font-family: $main-font-family;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
 }

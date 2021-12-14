@@ -1,0 +1,53 @@
+@import "../../../styles/colors";
+@import "../../../styles/themes";
+
+.progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+
+    .progress-bar-number {
+        font-size: 0.8em;
+        font-style: normal;
+        font-weight: 700;
+        color: $light-gray;
+    }
+
+    .progress-bar-numbers-container {
+        position: relative;
+        padding-inline: 3px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .fifty-percent {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .bar-container {
+        background-color: $white;
+        width: 100%;
+        height: 0.5em;
+        border-radius: 999px;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+
+        .bar-indicator {
+            width: 100%;
+            height: 100%;
+            border-radius: 999px;
+            background-color: $paris-daisy;
+        }
+    }
+
+    .percent {
+        align-self: flex-end;
+    }
+}

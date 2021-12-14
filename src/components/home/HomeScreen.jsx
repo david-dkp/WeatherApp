@@ -7,6 +7,7 @@ import SmallWeatherView from "../small-weather-view/SmallWeatherView"
 import add from "date-fns/add"
 import WindStatus from "../hightlights/wind-status/WindStatus"
 import { selectDaysConsolidatedWeathers } from "../../features/currentWeather/currentWeatherSlice"
+import Humidity from "../hightlights/humidity/Humidity"
 
 function HomeScreen() {
     const tempUnit = useSelector(selectTempUnit)
@@ -65,11 +66,24 @@ function HomeScreen() {
                         <h2 className="today-hightlights-title">
                             Today's Hightlights
                         </h2>
-                        <WindStatus
-                            mphValue="7"
-                            directionDegree={200}
-                            directionCompass="WSW"
-                        />
+                        <div className="today-hightlights-items-container">
+                            <WindStatus
+                                mphValue="7"
+                                directionDegree={200}
+                                directionCompass="WSW"
+                            />
+                            <Humidity percent="50" />
+                            <WindStatus
+                                mphValue="7"
+                                directionDegree={200}
+                                directionCompass="WSW"
+                            />
+                            <WindStatus
+                                mphValue="7"
+                                directionDegree={200}
+                                directionCompass="WSW"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>

@@ -59,7 +59,6 @@
     .today-hightlights-container {
         flex: 1;
         width: 100%;
-        background-color: red;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -68,6 +67,14 @@
             color: $white;
             font-size: 1.5em;
             font-weight: 700;
+        }
+
+        .today-hightlights-items-container {
+            display: grid;
+            gap: 48px;
+            margin-top: calc(min(2em, 2vh));
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
         }
     }
 }
