@@ -1,0 +1,8 @@
+.today-hightlights-items-container {
+    text-align: center;
+    display: grid;
+    gap: calc(min(2vw, 48px));
+    margin-top: calc(min(2em, 2vh));
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content;
+}

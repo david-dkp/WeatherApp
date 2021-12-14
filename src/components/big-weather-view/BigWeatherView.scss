@@ -2,13 +2,16 @@
 @import "../../styles/colors";
 
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: $surface;
-    min-height: 100vh;
+    min-height: 400px;
+    height: 100vh;
     width: 30%;
+    min-width: 300px;
     font-size: 16px;
     color: $white;
 }
@@ -32,6 +35,7 @@
     height: 30%;
     margin-top: 20px;
     flex-grow: 0.5;
+    max-height: 300px;
 
     .weather-background-image {
         background-image: url("../../assets/Cloud-background.png");

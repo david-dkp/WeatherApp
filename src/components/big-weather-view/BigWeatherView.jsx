@@ -15,6 +15,7 @@ import { toShortDateString } from "../../utilities/dateFormatter"
 import { useCookies } from "react-cookie"
 import { fetchLocationsByLatLng } from "../../apis/weatherApi"
 import { throttle } from "throttle-debounce"
+import SearchPanel from "../search/SearchPanel"
 
 function BigWeatherView({ ...props }) {
     const dispatch = useDispatch()
@@ -71,15 +72,13 @@ function BigWeatherView({ ...props }) {
             if (status.state === "granted") {
                 getLocationWeather()
             } else if (status.state === "denied") {
-                //TODO: show error
+                if (cookies["last_location_id"]) {
+                    dispatch(fetchWeathersForLocation(cookies.last_location_id))
+                } else {
+                    dispatch(fetchWeathersForLocation(44418))
+                }
             }
         })
-
-        if (cookies["last_location_id"]) {
-            dispatch(fetchWeathersForLocation(cookies.last_location_id))
-        } else {
-            getLocationWeather()
-        }
     }, [])
 
     return (
@@ -114,6 +113,8 @@ function BigWeatherView({ ...props }) {
                 <LocationOn className="location-on" />
                 <h3 className="location">{location}</h3>
             </div>
+
+            <SearchPanel />
         </div>
     )
 }

@@ -1,6 +1,10 @@
 @import "./styles/themes";
 @import "./styles/colors";
 
+body {
+    overflow: hidden;
+}
+
 button {
     background-color: $button-background;
     color: $white;

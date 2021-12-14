@@ -12,7 +12,7 @@ function ProgressBar({ progress, className }) {
             <div className="bar-container">
                 <div
                     className="bar-indicator"
-                    style={{ width: progress.concat("%") }}
+                    style={{ width: progress.toString().concat("%") }}
                 />
             </div>
             <p className="percent progress-bar-number">%</p>

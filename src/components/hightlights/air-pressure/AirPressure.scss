@@ -1,0 +1,13 @@
+@import "../../../styles/themes";
+
+.hightlight-airpressure-container {
+    background-color: $surface;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6em;
+    padding-block: 1.7em 2em;
+    padding-inline: 1em;
+    justify-content: center;
+}
