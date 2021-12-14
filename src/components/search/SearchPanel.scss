@@ -1,0 +1,93 @@
+@import "../../styles/themes";
+@import "../../styles/colors";
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.search-panel-container {
+    animation: 250ms linear 0s slideDown;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: $surface;
+    padding: 10px calc(clamp(10px, 5vw, 46px));
+    color: $white;
+
+    .close-search {
+        align-self: flex-end;
+        cursor: pointer;
+    }
+
+    .search-bar-input-container {
+        margin-top: calc(clamp(10px, 5vw, 45px));
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .location-search {
+            flex: 1 1 0px;
+        }
+
+        .search-button {
+            background-color: $royal-blue;
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+    .search-result-container {
+        display: flex;
+        margin-top: calc(clamp(10px, 3vw, 58px));
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+
+        .search-result-item-container {
+            text-align: start;
+            background: none;
+            box-shadow: none;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 1em;
+            font-weight: 500;
+            padding: 1.1em 0.8em;
+            color: $white;
+            outline: 1px solid $surface;
+            transition: all 0.3s ease;
+
+            .search-result-item-title {
+                flex: 1;
+            }
+
+            .search-result-item-arrow {
+                width: 0.7em;
+                color: $shuttle-gray;
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            &:hover {
+                outline: 1px solid $shuttle-gray;
+                .search-result-item-arrow {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

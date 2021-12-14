@@ -1,0 +1,30 @@
+@import "../../../styles/themes";
+@import "../../../styles/colors";
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid $white;
+    padding: 0.7em 1em;
+
+    svg {
+        width: 1em;
+        color: $shuttle-gray;
+    }
+
+    input {
+        min-width: 0px;
+        margin-left: 1em;
+        font-size: 1em;
+        height: 100%;
+        border: none;
+        flex: 1 0 0px;
+        color: $white;
+        background: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

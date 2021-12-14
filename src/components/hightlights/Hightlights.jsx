@@ -1,39 +1,23 @@
-import React, { useEffect } from "react"
+import React from "react"
 import "./Hightlights.scss"
 import WindStatus from "./wind-status/WindStatus"
 import Humidity from "./humidity/Humidity"
 import Visibility from "./visibility/Visibility"
 import AirPressure from "./air-pressure/AirPressure"
 import { useSelector } from "react-redux"
-import {
-    selectDaysConsolidatedWeathers,
-    selectWeatherStatus,
-} from "../../features/currentWeather/currentWeatherSlice"
+import { selectDaysConsolidatedWeathers } from "../../features/currentWeather/currentWeatherSlice"
 
 function Hightlights() {
-    const weatherStatus = useSelector(selectWeatherStatus)
     const todayConsolidatedWeather = useSelector(
         (state) => selectDaysConsolidatedWeathers(state)?.[0]
     )
 
-    let mphValue
-    let directionDegree
-    let directionCompass
-
-    let humidity
-
-    let milesVisibility
-
-    let mbAirPressure
-
-    useEffect(() => {
-        mphValue = 42
-        directionDegree = 42
-        directionCompass = "UP"
-        humidity = 42
-        milesVisibility = 42
-        mbAirPressure = 42
-    }, [])
+    let mphValue = 42
+    let directionDegree = 42
+    let directionCompass = "UP"
+    let humidity = 42
+    let milesVisibility = 42
+    let mbAirPressure = 42
 
     if (todayConsolidatedWeather) {
         mphValue = Math.round(todayConsolidatedWeather["wind_speed"])

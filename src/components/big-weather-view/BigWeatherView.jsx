@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "./BigWeatherView.scss"
 import { useSelector, useDispatch } from "react-redux"
 import { selectTempUnit } from "../../features/tempUnit/tempUnitSlice.js"
@@ -18,6 +18,8 @@ import { throttle } from "throttle-debounce"
 import SearchPanel from "../search/SearchPanel"
 
 function BigWeatherView({ ...props }) {
+    const [showSearchPanel, setShowSearchPanel] = useState(false)
+
     const dispatch = useDispatch()
 
     const tempUnit = useSelector(selectTempUnit)
@@ -79,12 +81,15 @@ function BigWeatherView({ ...props }) {
                 }
             }
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <div className="container" {...props}>
             <div className="search-container">
-                <button>Search for places</button>
+                <button onClick={(e) => setShowSearchPanel(true)}>
+                    Search for places
+                </button>
                 <button
                     className="round-icon"
                     onClick={(e) => getLocationWeather()}
@@ -114,7 +119,9 @@ function BigWeatherView({ ...props }) {
                 <h3 className="location">{location}</h3>
             </div>
 
-            <SearchPanel />
+            {showSearchPanel && (
+                <SearchPanel onClose={() => setShowSearchPanel(false)} />
+            )}
         </div>
     )
 }
