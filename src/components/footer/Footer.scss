@@ -1,0 +1,13 @@
+@import "../../styles/colors";
+
+.footer-text {
+    color: $light-gray;
+    font-family: "Monsterrat", sans-serif;
+    font-style: normal;
+    margin-top: calc(min(5vw, 70px));
+    padding-bottom: 25px;
+
+    .name {
+        font-weight: 700;
+    }
+}
