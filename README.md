@@ -34,11 +34,11 @@
 
 ![screenshot](screenshots/desktop-screenshot.png)
 
--   Where can I see your demo?
+-   Where can I see your demo?  
     You can see my demo right here :D : https://unruffled-fermi-18e89f.netlify.app/
--   What was your experience?
+-   What was your experience?  
     I've already done some Web projects, but not as big as this one. They were mainly "small" projects, each were focusing on a specific feature.
--   What have you learned/improved?
+-   What have you learned/improved?  
     I learned to build a website with React from A to Z, which is completly responsive and overall good looking.
     I learned how to share states between different components with Redux.
     I learned how to do API calls while handling loading state.
