@@ -80,6 +80,8 @@ function BigWeatherView({ ...props }) {
                     dispatch(fetchWeathersForLocation(44418))
                 }
             }
+
+            getLocationWeather()
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
