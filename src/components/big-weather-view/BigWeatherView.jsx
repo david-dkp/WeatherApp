@@ -16,6 +16,7 @@ import { useCookies } from "react-cookie"
 import { fetchLocationsByLatLng } from "../../apis/weatherApi"
 import { throttle } from "throttle-debounce"
 import SearchPanel from "../search/SearchPanel"
+import { CircularProgress } from "react-cssfx-loading"
 
 function BigWeatherView({ ...props }) {
     const [showSearchPanel, setShowSearchPanel] = useState(false)
@@ -53,7 +54,6 @@ function BigWeatherView({ ...props }) {
     const [cookies, setCookie] = useCookies(["last_location_id"])
 
     const getLocationWeather = throttle(1000, () => {
-        if (weatherStatus === "loading") return
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 fetchLocationsByLatLng(
@@ -97,30 +97,44 @@ function BigWeatherView({ ...props }) {
                     <MyLocation titleAccess="Weather from my position" />
                 </button>
             </div>
-            <div className="weather-image-container">
-                <div className="weather-background-image" />
-                <img src={weatherImageUrl} alt="" className="weather-image" />
-            </div>
-            <h1 className="today-temp">
-                {temp}
-                <span className="temp-unit">
-                    <span className="degre-symbol">°</span>
-                    {tempUnit}
-                </span>
-            </h1>
-            <h2 className="weather-desc">{weatherStateName}</h2>
-            <div className="date-container">
-                <h3 className="today">Today</h3>
-                <div className="centered-dot">•</div>
-                <h3 className="date-short">{dateString}</h3>
-            </div>
-            <div className="location-container">
-                <LocationOn className="location-on" />
-                <h3 className="location">{location}</h3>
-            </div>
 
-            {showSearchPanel && (
-                <SearchPanel onClose={() => setShowSearchPanel(false)} />
+            {weatherStatus === "loading" ? (
+                <div className="big-weather-loading">
+                    <CircularProgress color="#e7e7eb" />
+                </div>
+            ) : (
+                <>
+                    <div className="weather-image-container">
+                        <div className="weather-background-image" />
+                        <img
+                            src={weatherImageUrl}
+                            alt=""
+                            className="weather-image"
+                        />
+                    </div>
+                    <h1 className="today-temp">
+                        {temp}
+                        <span className="temp-unit">
+                            <span className="degre-symbol">°</span>
+                            {tempUnit}
+                        </span>
+                    </h1>
+                    <h2 className="weather-desc">{weatherStateName}</h2>
+                    <div className="date-container">
+                        <h3 className="today">Today</h3>
+                        <div className="centered-dot">•</div>
+                        <h3 className="date-short">{dateString}</h3>
+                    </div>
+                    <div className="location-container">
+                        <LocationOn className="location-on" />
+                        <h3 className="location">{location}</h3>
+                    </div>
+                    {showSearchPanel && (
+                        <SearchPanel
+                            onClose={() => setShowSearchPanel(false)}
+                        />
+                    )}
+                </>
             )}
         </div>
     )

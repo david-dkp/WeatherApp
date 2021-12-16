@@ -10,6 +10,7 @@ import { fetchLocationsByQuery } from "../../apis/weatherApi"
 import MyInput from "../common/my-input/MyInput"
 import { useDispatch } from "react-redux"
 import { fetchWeathersForLocation } from "../../features/currentWeather/currentWeatherSlice"
+import { CircularProgress } from "react-cssfx-loading/lib"
 
 function SearchPanel({ onClose }) {
     const dispatch = useDispatch()
@@ -78,9 +79,17 @@ function SearchPanel({ onClose }) {
                 </button>
             </div>
             <div className="search-result-container">
-                {results.map((result, i) => {
-                    return resultItem(result["woeid"], result["title"])
-                })}
+                {loading ? (
+                    <div className="search-loading-progress">
+                        <CircularProgress color="#e7e7eb" />
+                    </div>
+                ) : (
+                    <div className="search-result-subcontainer">
+                        {results.map((result, i) => {
+                            return resultItem(result["woeid"], result["title"])
+                        })}
+                    </div>
+                )}
             </div>
         </div>
     )

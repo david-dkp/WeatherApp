@@ -17,7 +17,7 @@ export const selectWeatherStatus = (state) => selectWeatherData(state).status
 export const currentWeatherSlice = createSlice({
     name: "currentWeather",
     initialState: {
-        status: "idle",
+        status: "loading",
         weather: {},
         error: null,
     },
