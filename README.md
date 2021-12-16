@@ -37,7 +37,9 @@
 -   Where can I see your demo?  
     You can see my demo right here :D : https://unruffled-fermi-18e89f.netlify.app/
 -   What was your experience?  
-    I've already done some Web projects, but not as big as this one. They were mainly "small" projects, each were focusing on a specific feature.
+    I felt so relief when I knew that the Design and its source files are given. I've always been slow at designing, so that was my first satisfaction.  
+    I worked on that project for 1 week, and the developement process was happening so fluently. I used [Notion](https://www.notion.so/) for tasks tracking, Git for code tracking, Figma for the design, and Pomodoro technique to keep my motivation and focus :D. I enjoyed so much that work flow, and I'm impatient to work on other challenges to discover new workflows, or improve mine.
+
 -   What have you learned/improved?  
     I learned to build a website with React from A to Z, which is completly responsive and overall good looking.
     I learned how to share states between different components with Redux.
