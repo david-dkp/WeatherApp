@@ -65,7 +65,6 @@ function SearchPanel({ onClose }) {
             <div className="search-bar-input-container">
                 <MyInput
                     className="location-search"
-                    id="location-search"
                     placeholder="search location"
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyPress={handleOnSearchKeyPress}

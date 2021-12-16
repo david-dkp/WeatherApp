@@ -23,7 +23,7 @@
     right: 0px;
     bottom: 0px;
     background-color: $surface;
-    padding: 10px calc(clamp(10px, 5vw, 46px));
+    padding: 10px calc(clamp(10px, 2vw, 46px));
     color: $white;
 
     .close-search {
@@ -32,17 +32,20 @@
     }
 
     .search-bar-input-container {
-        margin-top: calc(clamp(10px, 5vw, 45px));
+        margin-top: calc(clamp(10px, 4vw, 45px));
         width: 100%;
         display: flex;
         flex-direction: row;
         gap: 10px;
+        font-size: calc(clamp(0.8em, 1.3vw, 1em));
 
         .location-search {
-            flex: 1 1 0px;
+            flex: 1 0 0px;
         }
 
         .search-button {
+            font-size: 1em;
+            padding-inline: 1em;
             background-color: $royal-blue;
             border: none;
             box-shadow: none;
@@ -55,6 +58,7 @@
         flex-direction: column;
         gap: 10px;
         width: 100%;
+        overflow: scroll;
 
         .search-result-item-container {
             text-align: start;
