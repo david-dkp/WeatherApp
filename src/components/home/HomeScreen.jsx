@@ -1,16 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
 import BigWeatherView from "../big-weather-view/BigWeatherView"
 import "./HomeScreen.scss"
 import { selectTempUnit, setUnit } from "../../features/tempUnit/tempUnitSlice"
 import { useSelector, useDispatch } from "react-redux"
 import SmallWeatherView from "../small-weather-view/SmallWeatherView"
 import {
+    fetchWeathersForLocation,
     selectDaysConsolidatedWeathers,
     selectWeatherStatus,
 } from "../../features/currentWeather/currentWeatherSlice"
 import Hightlights from "../hightlights/Hightlights"
 import Footer from "../footer/Footer"
 import { CircularProgress } from "react-cssfx-loading/lib"
+import { useCookies } from "react-cookie"
+import { throttle } from "throttle-debounce"
+import { fetchLocationsByLatLng } from "../../apis/weatherApi"
 
 function HomeScreen() {
     const weatherStatus = useSelector(selectWeatherStatus)
@@ -34,9 +38,48 @@ function HomeScreen() {
             }
         })
 
+    const [cookies, setCookie] = useCookies(["last_location_id"])
+
+    const positionUnavailableText = "Position unavailable"
+
+    const getLocationWeather = throttle(1000, (onError) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                fetchLocationsByLatLng(
+                    position.coords.latitude,
+                    position.coords.longitude
+                ).then((result) => {
+                    if (result[0]) {
+                        dispatch(fetchWeathersForLocation(result[0].woeid))
+                        setCookie("last_location_id", result[0].woeid)
+                    }
+                })
+            }, onError)
+        } else {
+            onError({ message: positionUnavailableText })
+        }
+    })
+
+    useEffect(() => {
+        getLocationWeather((e) => {
+            if (cookies["last_location_id"]) {
+                dispatch(fetchWeathersForLocation(cookies["last_location_id"]))
+            } else {
+                dispatch(fetchWeathersForLocation(44418))
+            }
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <main className="main-container">
-            <BigWeatherView />
+            <BigWeatherView
+                onGetLocationWeather={() =>
+                    getLocationWeather((e) => {
+                        alert(e.message ?? "Something went wrong")
+                    })
+                }
+            />
             <section className="weather-details-section">
                 {weatherStatus === "loading" ? (
                     <div className="loading-progress">

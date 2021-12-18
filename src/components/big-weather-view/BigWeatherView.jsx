@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import "./BigWeatherView.scss"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { selectTempUnit } from "../../features/tempUnit/tempUnitSlice.js"
 import {
     selectWeatherData,
     selectWeatherStatus,
-    fetchWeathersForLocation,
 } from "../../features/currentWeather/currentWeatherSlice"
 
 import { MyLocation, LocationOn } from "@material-ui/icons"
 import { celToFar } from "../../utilities/tempConversion"
 import getWeatherImageUrl from "../../utilities/weatherImage"
 import { toShortDateString } from "../../utilities/dateFormatter"
-import { useCookies } from "react-cookie"
-import { fetchLocationsByLatLng } from "../../apis/weatherApi"
-import { throttle } from "throttle-debounce"
 import SearchPanel from "../search/SearchPanel"
 import { CircularProgress } from "react-cssfx-loading"
 
-function BigWeatherView({ ...props }) {
+function BigWeatherView({ onGetLocationWeather, ...props }) {
     const [showSearchPanel, setShowSearchPanel] = useState(false)
-
-    const dispatch = useDispatch()
 
     const tempUnit = useSelector(selectTempUnit)
     const weatherStatus = useSelector(selectWeatherStatus)
@@ -51,41 +45,6 @@ function BigWeatherView({ ...props }) {
         location = "Paradise"
     }
 
-    const [cookies, setCookie] = useCookies(["last_location_id"])
-
-    const getLocationWeather = throttle(1000, () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                fetchLocationsByLatLng(
-                    position.coords.latitude,
-                    position.coords.longitude
-                ).then((result) => {
-                    if (result[0]) {
-                        dispatch(fetchWeathersForLocation(result[0].woeid))
-                        setCookie("last_location_id", result[0].woeid)
-                    }
-                })
-            })
-        }
-    })
-
-    useEffect(() => {
-        navigator.permissions.query({ name: "geolocation" }).then((status) => {
-            if (status.state === "granted") {
-                getLocationWeather()
-            } else if (status.state === "denied") {
-                if (cookies["last_location_id"]) {
-                    dispatch(fetchWeathersForLocation(cookies.last_location_id))
-                } else {
-                    dispatch(fetchWeathersForLocation(44418))
-                }
-            }
-
-            getLocationWeather()
-        })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     return (
         <div className="container" {...props}>
             <div className="search-container">
@@ -94,7 +53,7 @@ function BigWeatherView({ ...props }) {
                 </button>
                 <button
                     className="round-icon"
-                    onClick={(e) => getLocationWeather()}
+                    onClick={(e) => onGetLocationWeather()}
                 >
                     <MyLocation titleAccess="Weather from my position" />
                 </button>
