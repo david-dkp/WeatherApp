@@ -13,7 +13,7 @@ import Hightlights from "../hightlights/Hightlights"
 import Footer from "../footer/Footer"
 import { CircularProgress } from "react-cssfx-loading/lib"
 import { useCookies } from "react-cookie"
-import { throttle } from "throttle-debounce"
+import { debounce } from "throttle-debounce"
 import { fetchLocationsByLatLng } from "../../apis/weatherApi"
 
 function HomeScreen() {
@@ -42,7 +42,7 @@ function HomeScreen() {
 
     const positionUnavailableText = "Position unavailable"
 
-    const getLocationWeather = throttle(1000, (onError) => {
+    const getLocationWeather = debounce(500, true, (onError) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 fetchLocationsByLatLng(

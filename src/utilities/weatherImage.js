@@ -23,6 +23,7 @@ function getWeatherImageUrl(name) {
             url = Hail
             break
         case "Thunderstorm":
+        case "Thunder":
             url = Thunderstorm
             break
         case "Heavy Rain":
