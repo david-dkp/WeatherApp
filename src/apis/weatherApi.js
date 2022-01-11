@@ -1,5 +1,5 @@
 const baseUrl =
-    "https://ancient-depths-04892.herokuapp.com/https://www.metaweather.com/api/location"
+    "https://weather-app-300202.herokuapp.com/https://www.metaweather.com/api/location"
 
 export const fetchLocationWeathers = async (locationId) => {
     const response = await fetch(`${baseUrl}/${locationId}`)
